@@ -1,0 +1,5 @@
+# inboxHero has no hard dependencies -- the default drafting path
+# (MODEL_PROVIDER=template) is pure standard library.
+#
+# Uncomment if you wire up a real model provider and want .env loading:
+# python-dotenv

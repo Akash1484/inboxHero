@@ -1,0 +1,10 @@
+{
+  "in_reply_to": "m008",
+  "to": "devika@paperjet.io",
+  "cc": [],
+  "subject": "Re: Re: Staging is down again",
+  "body": "Hi Devika -- here's the current staging queue URL: amqp://pj_stage:Rk7-quiet-otter-51@broker-stg.paperjet.io:5672/pjs\n(pulled from the message where it was first shared, ref m003; nothing rotated since).",
+  "cited_ids": [
+    "m003"
+  ]
+}

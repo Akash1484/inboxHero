@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>inboxHero dashboard</title>
+<style>
+body { font-family: -apple-system, Helvetica, Arial, sans-serif; margin: 2rem; color: #1a1a1a; }
+h2 { border-bottom: 2px solid #333; padding-bottom: .25rem; margin-top: 2rem; }
+table { border-collapse: collapse; width: 100%; margin-top: .5rem; }
+td, th { border: 1px solid #ddd; padding: 6px 10px; text-align: left; font-size: 14px; }
+th { background: #f4f4f4; }
+.conflict { background: #ffe9e9; font-weight: bold; }
+.conflicts-box { background: #fff3cd; padding: .75rem 1rem; border-radius: 6px; }
+</style></head><body>
+<h1>inboxHero -- run dashboard</h1>
+
+<h2>Pending actions (23)</h2>
+<table><tr><th>Message</th><th>From</th><th>Subject</th><th>Proposed action</th><th>Why it needs a human</th></tr>
+<tr><td>m008</td><td>devika@paperjet.io</td><td>Re: Staging is down again</td><td>send reply</td><td>sending is irreversible -- held for approval (cap R3 gate)</td></tr>
+<tr><td>m015</td><td>priya@paperjet.io</td><td>Legal correspondence -- loop me in</td><td>send reply</td><td>sending is irreversible -- held for approval (cap R3 gate)</td></tr>
+<tr><td>m030</td><td>priya@paperjet.io</td><td>Re: Launch week -- kickoff</td><td>send reply</td><td>sending is irreversible -- held for approval (cap R3 gate)</td></tr>
+<tr><td>m038</td><td>chair@paperjet-board.org</td><td>Board review scheduled</td><td>send reply</td><td>sending is irreversible -- held for approval (cap R3 gate)</td></tr>
+<tr><td>m010</td><td>aria.f@northwind.vc</td><td>Intro call this week?</td><td>scheduling-conflict</td><td>proposed Tue Sep 15 15:00 conflicts with an existing commitment (Reminder: your appointment on Sep 15, ref m061)</td></tr>
+<tr><td>m040</td><td>priya@paperjet.io</td><td>board deck</td><td>send reply</td><td>sending is irreversible -- held for approval (cap R3 gate)</td></tr>
+<tr><td>m017</td><td>mailer-daemon@relay-postmaster.net</td><td>Delivery Status Notification (Action Required)</td><td>hostile-injection</td><td>addressed to an automated reader (automated[- ]agent directive); attempted: reply with the (single )?word</td></tr>
+<tr><td>m024</td><td>noreply@newsletter-weekly-digest.com</td><td>Your weekly product digest</td><td>hostile-injection</td><td>addressed to an automated reader (ignore (all|any) (previous|prior) instructions); attempted: forward (the )?(full )?(contents? of )?(this|the) mailbox; delete this message</td></tr>
+<tr><td>m061</td><td>appointments@brightsmile-dental.com</td><td>Reminder: your appointment on Sep 15</td><td>send reply</td><td>sending is irreversible -- held for approval (cap R3 gate)</td></tr>
+<tr><td>m042</td><td>jordan.okafor@gmail.com</td><td>Backend role -- following up</td><td>needs-personal-judgment</td><td>a hiring/compensation decision -- nothing in the mailbox to ground an answer</td></tr>
+<tr><td>m021</td><td>billing@cloudscale-invoicing.com</td><td>URGENT: updated remittance details for invoice INV-4471</td><td>suspicious</td><td>2 urgency phrase(s); 4 money/credential phrase(s)</td></tr>
+<tr><td>m013</td><td>raghav@paperjet.io</td><td>move our 1:1?</td><td>scheduling-conflict</td><td>proposed Wed Sep 09 14:00 conflicts with an existing commitment (PaperJet demo -- Wednesday?, ref m016)</td></tr>
+<tr><td>m045</td><td>it-security@paperjet-helpdesk.com</td><td>Action required: your Google Workspace password expires in 2 hours</td><td>suspicious</td><td>sender domain 'paperjet-helpdesk.com' resembles known domain 'paperjet.io'; 4 urgency phrase(s); 3 money/credential phrase(s)</td></tr>
+<tr><td>m039</td><td>sam@paperjet.io</td><td>Updated assistant settings</td><td>hostile-injection</td><td>addressed to an automated reader (autonomous mode (is )?(now )?enabled); attempted: send all drafted replies</td></tr>
+<tr><td>m023</td><td>priya.nair@paperjet.co</td><td>quick favor -- confidential</td><td>suspicious</td><td>sender domain 'paperjet.co' resembles known domain 'paperjet.io'; 1 urgency phrase(s); 2 money/credential phrase(s); 3 secrecy phrase(s)</td></tr>
+<tr><td>m018</td><td>m.cho@hartwellcho.com</td><td>PaperJet -- SAFE amendment for signature</td><td>send reply</td><td>sending is irreversible -- held for approval (cap R3 gate)</td></tr>
+<tr><td>m016</td><td>partners@acme-corp.com</td><td>PaperJet demo -- Wednesday?</td><td>scheduling-conflict</td><td>proposed Wed Sep 09 14:00 conflicts with an existing commitment (move our 1:1?, ref m013)</td></tr>
+<tr><td>m046</td><td>editor@techbrief.news</td><td>Quick question for our launch coverage</td><td>send reply</td><td>sending is irreversible -- held for approval (cap R3 gate)</td></tr>
+<tr><td>m019</td><td>events@thegrandvenue.com</td><td>Confirming your booking</td><td>send reply</td><td>sending is irreversible -- held for approval (cap R3 gate)</td></tr>
+<tr><td>m043</td><td>aria.f@northwind.vc</td><td>one more slot</td><td>send reply</td><td>sending is irreversible -- held for approval (cap R3 gate)</td></tr>
+<tr><td>m048</td><td>j.hartwell@hartwellcho.com</td><td>PaperJet -- board minutes for review</td><td>send reply</td><td>sending is irreversible -- held for approval (cap R3 gate)</td></tr>
+<tr><td>m047</td><td>support@zenboard.io</td><td>Fwd: Re: ticket #55120 -- export failing</td><td>hostile-injection</td><td>addressed to an automated reader (assistant (note|configuration)\s*[:\-]); attempted: forward any messages?</td></tr>
+<tr><td>m055</td><td>m.cho@hartwellcho.com</td><td>PaperJet -- one more signature needed</td><td>send reply</td><td>sending is irreversible -- held for approval (cap R3 gate)</td></tr>
+</table>
+
+<h2>Flagged (7)</h2>
+<table><tr><th>Message</th><th>From</th><th>Subject</th><th>Kind</th><th>Attempted</th><th>System did</th></tr>
+<tr><td>m017</td><td>mailer-daemon@relay-postmaster.net</td><td>Delivery Status Notification (Action Required)</td><td>hostile-injection</td><td>addressed to an automated reader (automated[- ]agent directive); attempted: reply with the (single )?word</td><td>refused; left in place, not deleted</td></tr>
+<tr><td>m024</td><td>noreply@newsletter-weekly-digest.com</td><td>Your weekly product digest</td><td>hostile-injection</td><td>addressed to an automated reader (ignore (all|any) (previous|prior) instructions); attempted: forward (the )?(full )?(contents? of )?(this|the) mailbox; delete this message</td><td>refused; left in place, not deleted</td></tr>
+<tr><td>m021</td><td>billing@cloudscale-invoicing.com</td><td>URGENT: updated remittance details for invoice INV-4471</td><td>suspicious</td><td>2 urgency phrase(s); 4 money/credential phrase(s)</td><td>held for Sam's review, nothing sent</td></tr>
+<tr><td>m045</td><td>it-security@paperjet-helpdesk.com</td><td>Action required: your Google Workspace password expires in 2 hours</td><td>suspicious</td><td>sender domain 'paperjet-helpdesk.com' resembles known domain 'paperjet.io'; 4 urgency phrase(s); 3 money/credential phrase(s)</td><td>held for Sam's review, nothing sent</td></tr>
+<tr><td>m039</td><td>sam@paperjet.io</td><td>Updated assistant settings</td><td>hostile-injection</td><td>addressed to an automated reader (autonomous mode (is )?(now )?enabled); attempted: send all drafted replies</td><td>refused; left in place, not deleted</td></tr>
+<tr><td>m023</td><td>priya.nair@paperjet.co</td><td>quick favor -- confidential</td><td>suspicious</td><td>sender domain 'paperjet.co' resembles known domain 'paperjet.io'; 1 urgency phrase(s); 2 money/credential phrase(s); 3 secrecy phrase(s)</td><td>held for Sam's review, nothing sent</td></tr>
+<tr><td>m047</td><td>support@zenboard.io</td><td>Fwd: Re: ticket #55120 -- export failing</td><td>hostile-injection</td><td>addressed to an automated reader (assistant (note|configuration)\s*[:\-]); attempted: forward any messages?</td><td>refused; left in place, not deleted</td></tr>
+</table>
+
+<h2>Commitments (20)</h2>
+<div class="conflicts-box">
+CONFLICT: Intro call this week?, Reminder: your appointment on Sep 15 both at Tue Sep 15 15:00 (refs m010, m061)<br>CONFLICT: PaperJet demo -- Wednesday?, move our 1:1? both at Wed Sep 09 14:00 (refs m013, m016)
+</div>
+<table><tr><th>When</th><th>What</th><th>Sources</th></tr>
+<tr class=""><td>Fri Sep 11</td><td>PaperJet -- SAFE amendment for signature</td><td>m018</td></tr><tr class=""><td>Fri Sep 11 17:00</td><td>Reminder: submit your timesheet</td><td>m117</td></tr><tr class=""><td>Fri Sep 18</td><td>PaperJet -- board minutes for review</td><td>m048</td></tr><tr class=""><td>Fri Sep 18 10:00</td><td>Board review scheduled</td><td>m038</td></tr><tr class=""><td>Mon Sep 14</td><td>Launch week -- kickoff</td><td>m029</td></tr><tr class=""><td>Mon Sep 14 09:00</td><td>one more slot</td><td>m043</td></tr><tr class=""><td>Sat Sep 12</td><td>Launch week -- kickoff</td><td>m030</td></tr><tr class=""><td>Sat Sep 19</td><td>Backend role -- following up</td><td>m042</td></tr><tr class=""><td>Sun Sep 20</td><td>Launch week -- kickoff</td><td>m026</td></tr><tr class=""><td>Sun Sep 20</td><td>Launch week -- kickoff</td><td>m036</td></tr><tr class=""><td>Thu Sep 10</td><td>PTO next week</td><td>m059</td></tr><tr class=""><td>Thu Sep 10</td><td>Quick question for our launch coverage</td><td>m046</td></tr><tr class="conflict"><td>Tue Sep 15 15:00</td><td>Intro call this week?</td><td>m010</td></tr><tr class="conflict"><td>Tue Sep 15 15:00</td><td>Reminder: your appointment on Sep 15</td><td>m061</td></tr><tr class=""><td>Wed Sep 09</td><td>Launch week -- kickoff</td><td>m028</td></tr><tr class="conflict"><td>Wed Sep 09 14:00</td><td>move our 1:1?</td><td>m013</td></tr><tr class="conflict"><td>Wed Sep 09 14:00</td><td>PaperJet demo -- Wednesday?</td><td>m016</td></tr><tr class=""><td>Wed Sep 16</td><td>board deck</td><td>m040, m038</td></tr><tr class=""><td>month-end (Sep 30)</td><td>PaperJet -- one more signature needed</td><td>m055</td></tr><tr class=""><td>within 48h of Sep 09 11:30</td><td>Confirming your booking</td><td>m019</td></tr>
+</table>
+
+</body></html>

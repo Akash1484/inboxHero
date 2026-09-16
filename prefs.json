@@ -1,0 +1,11 @@
+{
+  "cc_on_legal": {
+    "cc_address": "priya@paperjet.io",
+    "trigger_domain": "hartwellcho.com",
+    "source": "m015"
+  },
+  "no_meetings_before": {
+    "earliest_hour": 11,
+    "source": "m041"
+  }
+}

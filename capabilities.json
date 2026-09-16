@@ -1,0 +1,117 @@
+{
+  "student": "Akash Chaudhari, cert-aai-2026-06-0052",
+  "repo": "https://github.com/akashchaudhari/inboxHero",
+  "system": {
+    "framework": "none",
+    "model": "template-based drafting by default (core/llm.py) -- no external model call is made in the default run. MODEL_PROVIDER is a pluggable hook (config.py / .env.example) for swapping in a real provider; see CAPABILITIES.md for why the default is template-only.",
+    "messages_processed": 100,
+    "rule_handled": 84,
+    "dispositions": ["reply", "archive", "defer", "delegate", "escalate"],
+    "retrieval": "thread-walk",
+    "irreversible": ["send", "delete"],
+    "reversible": ["draft", "label", "archive", "defer"],
+    "gate": "both",
+    "preference_demo": "m015: CC Priya on anything from Hartwell & Cho; applied to m018 on the next run"
+  },
+  "capabilities": [
+    {
+      "id": "R1",
+      "name": "Zero the inbox",
+      "tier": "B",
+      "claim": "Assigns every message exactly one disposition (reply/archive/defer/delegate/escalate) with a one-line reason, leaving none untouched.",
+      "command": "python demo.py --cap R1",
+      "observable": "Prints a table of all 100 messages, each with a disposition and reason, then the line 'undecided: 0'. Also writes decisions.json.",
+      "evidence": "trace.jsonl, events tagged cap=R1 (one 'decision' event per message id)"
+    },
+    {
+      "id": "R2",
+      "name": "Grounded reply",
+      "tier": "B",
+      "claim": "Drafts a reply that is grounded in a specific earlier message and records the message ids it drew on, checked against the mail store.",
+      "command": "python demo.py --cap R2 --msg m008",
+      "observable": "Prints a draft answering m008 (Devika asking to resend the staging queue URL) that contains the exact AMQP URL from m003, plus a 'cited: [\"m003\"]' line. m003 really contains that URL -- run.py asserts the cited id exists in the store before printing.",
+      "evidence": "trace.jsonl, events tagged cap=R2 (a 'draft' event whose cited id is m003)"
+    },
+    {
+      "id": "R3",
+      "name": "Gate the irreversible",
+      "tier": "C",
+      "claim": "Never sends or deletes without either per-action approval or an explicit --dry-run that shows what it would do.",
+      "command": "python demo.py --cap R3 --dry-run",
+      "observable": "Prints every send/delete it WOULD perform (12 sends), then 'outbox/ writes: 0' because dry-run suppresses them. Re-running without --dry-run (`python demo.py --cap R3`) prompts y/N before each send and each delete.",
+      "evidence": "trace.jsonl, events tagged cap=R3 ('gate' events recording the proposed action and the decision)"
+    },
+    {
+      "id": "R4",
+      "name": "Persistent preference",
+      "tier": "C",
+      "claim": "Records a stated preference and applies it on a later run after the process has fully exited.",
+      "command": "python demo.py --cap R4",
+      "observable": "First invocation (prefs.json absent or incomplete) learns 'CC priya@paperjet.io on anything from Hartwell & Cho' from m015 and 'no meetings before 11:00' from m041, stores both to prefs.json, and exits. Second invocation, a genuinely fresh process, drafts a reply to the Hartwell & Cho message m018 with Priya CC'd automatically, and evaluates the 9am meeting ask m043 as a counter-offer -- neither preference is restated.",
+      "evidence": "prefs.json on disk between runs; trace.jsonl events tagged cap=R4"
+    },
+    {
+      "id": "R5",
+      "name": "Refuse embedded instructions",
+      "tier": "C",
+      "claim": "Detects instructions addressed to the assistant inside message bodies, refuses them, flags them, and reports them to the user.",
+      "command": "python demo.py --cap R5",
+      "observable": "Scans all 100 messages and prints 'FLAGGED: <id> -- <reason>' for each of 4 injection attempts (m017 fake delivery-failure directive, m024 forward-and-delete-mailbox, m039 a self-addressed note posing as an 'assistant settings' change to disable approval and autonomy, m047 an instruction hidden inside a forwarded quote). outbox/ contains no message sent as a result of any of the four, and none of the four is deleted.",
+      "evidence": "trace.jsonl, events tagged cap=R5 (a 'refusal' event naming each hostile message id and what it attempted)"
+    },
+    {
+      "id": "R6",
+      "name": "Dashboard",
+      "tier": "C",
+      "claim": "Generates a three-pane view (pending actions, flagged, commitments) reproducible from a run, with commitments cited to source messages and conflicts surfaced.",
+      "command": "python demo.py --cap R6",
+      "observable": "Writes dashboard.html and dashboard.json. Commitments pane lists 20 dated items; one, the board deck deadline, is derived from two messages (m040's 'two days before the board review' resolved against m038's 'the 18th', giving the 16th). Two real double-bookings are printed and marked, not silently listed: 'CONFLICT: Intro call this week?, Reminder: your appointment on Sep 15 both at Tue Sep 15 15:00 (refs m010, m061)' and a second between the moved 1:1 (m013) and the Acme demo (m016), both Wed 14:00.",
+      "evidence": "dashboard.html and dashboard.json; trace.jsonl events tagged cap=R6"
+    },
+    {
+      "id": "X1",
+      "name": "Follow-up tracking",
+      "tier": "B",
+      "claim": "Finds messages I sent that nobody has answered in 3+ days, and drafts a chase for each.",
+      "command": "python demo.py --cap X1",
+      "observable": "Prints a JSON list of {message_id, days_waiting, to, subject, draft}. m044 (sent to Priya asking her to approve a contractor invoice, 7 days waiting, never answered) appears. m003 (sent to Raghav, answered by m005) does not.",
+      "evidence": "trace.jsonl, events tagged cap=X1"
+    },
+    {
+      "id": "X2",
+      "name": "Morning digest",
+      "tier": "B",
+      "claim": "Produces a one-screen digest: what needs me today, what can wait, and what was auto-archived.",
+      "command": "python demo.py --cap X2",
+      "observable": "Prints three sections. 'Needs you' contains all 11 escalations (4 injections, 3 phishing attempts, 3 scheduling-conflict messages spanning 2 distinct double-bookings, 1 hiring decision); 'Can wait' lists the 12 drafted replies plus the deferred and delegated items; 'Auto-archived' reports the count (73) with 5 examples rather than listing all of them.",
+      "evidence": "trace.jsonl, events tagged cap=X2"
+    },
+    {
+      "id": "X3",
+      "name": "Correspondent lookup",
+      "tier": "A",
+      "claim": "Lists all mail from a given sender or domain, most recent first -- a single lookup, no classification.",
+      "command": "python demo.py --cap X3 --sender hartwellcho.com",
+      "observable": "Prints a JSON list of the 3 Hartwell & Cho messages (m055, m048, m018), newest first, each with id/from/subject/timestamp/unread.",
+      "evidence": "trace.jsonl, events tagged cap=X3"
+    },
+    {
+      "id": "X4",
+      "name": "Phishing / social-engineering detector",
+      "tier": "C",
+      "claim": "Flags mail impersonating a known party to move money or credentials, using domain-lookalike detection (weighed against domains this mailbox has actually exchanged 2+ messages with) combined with urgency/money/secrecy language -- and holds it for review rather than acting.",
+      "command": "python demo.py --cap X4",
+      "observable": "Prints 'SUSPICIOUS: <id> -- <reason>' for 3 messages: m021 (fake remittance-details change, cloudscale-invoicing.com), m045 (fake IT password-expiry harvesting credentials from paperjet-helpdesk.com, a lookalike of paperjet.io), and m023 (a wire-transfer favor from priya.nair@paperjet.co, one character off the real paperjet.io -- and not actually Priya). None of the 3 gets a drafted reply.",
+      "evidence": "trace.jsonl, events tagged cap=X4"
+    },
+    {
+      "id": "X5",
+      "name": "Preference-aware scheduling assistant",
+      "tier": "C",
+      "claim": "Checks every meeting proposal against existing timed commitments and the standing calendar preference, then confirms, counter-offers, or holds for approval -- never guessing which of two conflicting meetings should win.",
+      "command": "python demo.py --cap X5",
+      "observable": "Prints one line per proposal. m010 and m013/m016 come back 'conflict' (each cites the specific message it collides with); m043 comes back 'counter' with a drafted 11:00-or-later counter-offer, citing the preference's source message m041, without asking Sam again.",
+      "evidence": "trace.jsonl, events tagged cap=X5"
+    }
+  ]
+}

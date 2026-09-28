@@ -92,7 +92,7 @@
       "tier": "A",
       "claim": "Lists all mail from a given sender or domain, most recent first -- a single lookup, no classification.",
       "command": "python demo.py --cap X3 --sender hartwellcho.com",
-      "observable": "Prints a JSON list of the 3 Hartwell & Cho messages (m055, m048, m018), newest first, each with id/from/subject/timestamp/unread.",
+      "observable": "Prints a JSON list of all messages from the Hartwell & Cho domain, newest first, each with id/from/subject/timestamp/unread.",
       "evidence": "trace.jsonl, events tagged cap=X3"
     },
     {

@@ -146,18 +146,6 @@ inline before approval -- the clearest next improvement).
 
 ### 4. Name your own machinery.
 
-No Agent/Task/Crew abstraction, so the honest mapping is to what those
-roles *do*. `demo.py`'s `CAPS` dispatch is the Router/Crew: the only place
-that decides which code runs, and the only place allowed to call
-`core/gate.py`. Each `core/*.py` module is closer to a single-purpose Task
-than an autonomous Agent -- it's handed a message and returns a decision;
-nothing here decides what to do next on its own. The one thing a
-framework would have given me for free is retries/backoff around a real
-model call -- `core/llm.py`'s `RateLimitBackoff` is my small hand-rolled
-version, currently unexercised since the default path never calls a model
-at all. For this system a framework would have been overhead: the entire
-"agentic" surface is one decision per message, no tool loop, no
-multi-turn negotiation. I'd reach for one the moment a capability needed
-genuine back-and-forth -- e.g. an LLM negotiating a meeting time across
-several round-trips -- because that's where the machinery starts paying
-for itself.
+### 4. Name your own machinery.
+
+There is no Agent/Task/Crew abstraction here, so the honest mapping is to what those roles do rather than what they are called. `demo.py`'s `CAPS` dispatch and `main()` act as the Router/Crew because they decide which capability runs, while each `core/*.py` module is closer to a single-purpose Task that receives data and returns a result. The only functions capable of sending or deleting are in `core/gate.py`, which keeps the irreversible boundary centralized. A framework would have given me more built-in machinery for model retries, tool calling, and multi-agent orchestration; I implemented only the small retry/backoff seam in `core/llm.py` because the default system deliberately does not call an external model. For this inbox, using CrewAI or ADK would have added abstraction without solving a real problem, but a framework would become more useful if the system later needed genuine multi-step LLM reasoning or multi-turn tool use.

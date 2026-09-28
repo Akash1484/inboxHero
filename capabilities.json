@@ -5,7 +5,7 @@
     "framework": "none",
     "model": "template-based drafting by default (core/llm.py) -- no external model call is made in the default run. MODEL_PROVIDER is a pluggable hook (config.py / .env.example) for swapping in a real provider; see CAPABILITIES.md for why the default is template-only.",
     "messages_processed": 100,
-    "rule_handled": 84,
+    "rule_handled": 100,
     "dispositions": ["reply", "archive", "defer", "delegate", "escalate"],
     "retrieval": "thread-walk",
     "irreversible": ["send", "delete"],

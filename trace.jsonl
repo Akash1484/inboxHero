@@ -156,3 +156,16 @@
 {"ts": "2026-09-28T19:16:26", "cap": "R3", "event": "sent", "message_id": "m055", "path": "outbox/m055.json"}
 {"ts": "2026-09-28T19:16:26", "cap": "R3", "event": "gate", "action": "delete", "message_id": "synthetic-example", "reason": "illustrative only -- no real message in this inbox is proposed for deletion", "proposed": true, "decision": "approved"}
 {"ts": "2026-09-28T19:16:26", "cap": "R3", "event": "deleted", "message_id": "synthetic-example"}
+{"ts": "2026-09-29T01:10:01", "cap": "R3", "event": "gate", "action": "send", "message_id": "m008", "to": "devika@paperjet.io", "cc": [], "proposed": true, "decision": "dry_run"}
+{"ts": "2026-09-29T01:10:01", "cap": "R3", "event": "gate", "action": "send", "message_id": "m015", "to": "priya@paperjet.io", "cc": [], "proposed": true, "decision": "dry_run"}
+{"ts": "2026-09-29T01:10:01", "cap": "R3", "event": "gate", "action": "send", "message_id": "m030", "to": "priya@paperjet.io", "cc": [], "proposed": true, "decision": "dry_run"}
+{"ts": "2026-09-29T01:10:01", "cap": "R3", "event": "gate", "action": "send", "message_id": "m038", "to": "chair@paperjet-board.org", "cc": [], "proposed": true, "decision": "dry_run"}
+{"ts": "2026-09-29T01:10:01", "cap": "R3", "event": "gate", "action": "send", "message_id": "m040", "to": "priya@paperjet.io", "cc": [], "proposed": true, "decision": "dry_run"}
+{"ts": "2026-09-29T01:10:01", "cap": "R3", "event": "gate", "action": "send", "message_id": "m061", "to": "appointments@brightsmile-dental.com", "cc": [], "proposed": true, "decision": "dry_run"}
+{"ts": "2026-09-29T01:10:01", "cap": "R3", "event": "gate", "action": "send", "message_id": "m018", "to": "m.cho@hartwellcho.com", "cc": ["priya@paperjet.io"], "proposed": true, "decision": "dry_run"}
+{"ts": "2026-09-29T01:10:01", "cap": "R3", "event": "gate", "action": "send", "message_id": "m046", "to": "editor@techbrief.news", "cc": [], "proposed": true, "decision": "dry_run"}
+{"ts": "2026-09-29T01:10:01", "cap": "R3", "event": "gate", "action": "send", "message_id": "m019", "to": "events@thegrandvenue.com", "cc": [], "proposed": true, "decision": "dry_run"}
+{"ts": "2026-09-29T01:10:01", "cap": "R3", "event": "gate", "action": "send", "message_id": "m043", "to": "aria.f@northwind.vc", "cc": [], "proposed": true, "decision": "dry_run"}
+{"ts": "2026-09-29T01:10:01", "cap": "R3", "event": "gate", "action": "send", "message_id": "m048", "to": "j.hartwell@hartwellcho.com", "cc": ["priya@paperjet.io"], "proposed": true, "decision": "dry_run"}
+{"ts": "2026-09-29T01:10:01", "cap": "R3", "event": "gate", "action": "send", "message_id": "m055", "to": "m.cho@hartwellcho.com", "cc": ["priya@paperjet.io"], "proposed": true, "decision": "dry_run"}
+{"ts": "2026-09-29T01:10:01", "cap": "R3", "event": "gate", "action": "delete", "message_id": "synthetic-example", "reason": "illustrative only -- no real message in this inbox is proposed for deletion", "proposed": true, "decision": "dry_run"}

@@ -104,47 +104,15 @@ the documented fallback for the one cross-thread fact this inbox needs
 
 ### 1. What did you refuse to automate?
 
-The clearest case is m008: Devika, a real colleague in a real thread,
-asks the system to resend a secret (the rotated staging broker
-credential) over email. The system *drafts* that reply -- grounding is
-exactly what cap R2 is supposed to prove -- but it will never send it
-unsupervised, because sending is irreversible and gated behind
-`require_approval()` regardless of who's asking or how routine the
-request looks. Similarly, when two commitments collide (m010's investor
-call and m061's dentist appointment, both Tuesday 3pm; m013's moved 1:1
-and m016's Acme demo, both Wednesday 2pm), the system refuses to pick a
-winner -- it holds both for Sam rather than silently keeping one and
-dropping the other.
+The clearest case is m008: Devika asks the system to resend a rotated staging broker credential over email. The system can draft that response because grounded drafting is part of R2, but it will never send it without human approval because sending is irreversible. Similarly, when two commitments collide, such as m010 with m061 or m013 with m016, the system refuses to decide which meeting should win and instead holds the conflict for Sam. This boundary keeps the system useful for preparation while leaving consequential decisions and secret-bearing sends under human control.
 
 ### 2. Where does untrusted text enter your system?
 
-Every message body is untrusted the moment it's read, and stays that way
-structurally, not by prompt convention. Message text only ever flows into
-two kinds of code: pattern-matching functions (`core/security.py`,
-`core/rules.py`) that check *whether* text looks hostile and return a
-boolean, never executing anything they find; and string interpolation
-inside a fixed drafting template (`core/drafting.py`), where a fact
-becomes one field in a sentence, never a new instruction to follow. The
-only two functions that can send or delete (`core/gate.py`) are called
-exclusively from `demo.py`'s own dispatch logic, driven by a disposition
-the pipeline computed -- never by text found inside a message. That's why
-m017, m024, m039 (a self-addressed note posing as an "assistant settings"
-change to disable approval and autonomy), and m047 all fail identically:
-there was never a path from message content to `gate.send`/`gate.delete`
-in the first place.
+Every message body is treated as untrusted data as soon as it enters the system, rather than as an instruction to the program. Message text flows into pattern-matching functions in `core/security.py` and `core/rules.py`, or into fixed drafting templates where message facts become fields rather than executable instructions. The only two functions capable of sending or deleting are `core/gate.py:send` and `core/gate.py:delete`, and both require the gate before performing an irreversible action. An attacker would therefore have to compromise the program's own dispatch or gate code rather than merely persuading the inbox reader with carefully written email text.
 
 ### 3. Who is accountable when it sends the wrong thing?
 
-Sam is -- the system drafts, Sam approves, and `core/gate.py` only writes
-to `outbox/` after that approval, logged in `trace.jsonl` alongside the
-recipients and the exact cited message ids the draft was grounded in. A
-wrong send traces back to either a bad citation (a grounding bug, mine to
-fix -- and citations are asserted against the store before being shown,
-see `demo.py:run_r2`) or a human approving something he shouldn't have
-(Sam's call, and mine to make easier, e.g. by surfacing the cited source
-inline before approval -- the clearest next improvement).
-
-### 4. Name your own machinery.
+Sam remains accountable because the system only writes a message to `outbox/` after the human approves the irreversible send. The system helps trace the failure through `trace.jsonl`, which records the message being answered, recipients, and cited source message ids for the draft. Grounding citations are also checked against the message store before the draft is shown, so a bad factual grounding can be traced back to the system's retrieval or drafting logic. If the draft was correctly grounded but Sam approved an inappropriate message, the approval decision remains the human's responsibility.
 
 ### 4. Name your own machinery.
 

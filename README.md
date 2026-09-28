@@ -2,7 +2,7 @@
 
 *Build It, Then Prove It -- Assignment 06, Agentic AI: From Concepts to Practice*
 
-**Repository:** https://github.com/akashchaudhari/inboxHero
+**Repository:** https://github.com/Akash1484/inboxHero
 **Student:** Akash Chaudhari, cert-aai-2026-06-0052
 
 An agentic triage system for a mock 100-message inbox: it assigns every
@@ -16,7 +16,7 @@ detector, and a preference-aware scheduling assistant).
 ## Quickstart
 
 ```bash
-git clone https://github.com/akashchaudhari/inboxHero.git
+git clone https://github.com/Akash1484/inboxHero.git
 cd inboxHero
 python demo.py --cap R1        # any single capability
 python demo.py --all           # everything, in order (R3 runs --dry-run)

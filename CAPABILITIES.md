@@ -1,7 +1,7 @@
 # CAPABILITIES.md
 
 **Student:** Akash Chaudhari, cert-aai-2026-06-0052
-**Repository:** https://github.com/akashchaudhari/inboxHero
+**Repository:** https://github.com/Akash1484/inboxHero
 
 Run everything through one entry point:
 

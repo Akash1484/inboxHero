@@ -1,6 +1,6 @@
 {
   "student": "Akash Chaudhari, cert-aai-2026-06-0052",
-  "repo": "https://github.com/akashchaudhari/inboxHero",
+  "repo": "https://github.com/Akash1484/inboxHero",
   "system": {
     "framework": "none",
     "model": "template-based drafting by default (core/llm.py) -- no external model call is made in the default run. MODEL_PROVIDER is a pluggable hook (config.py / .env.example) for swapping in a real provider; see CAPABILITIES.md for why the default is template-only.",
@@ -29,7 +29,7 @@
       "tier": "B",
       "claim": "Drafts a reply that is grounded in a specific earlier message and records the message ids it drew on, checked against the mail store.",
       "command": "python demo.py --cap R2 --msg m008",
-      "observable": "Prints a draft answering m008 (Devika asking to resend the staging queue URL) that contains the exact AMQP URL from m003, plus a 'cited: [\"m003\"]' line. m003 really contains that URL -- run.py asserts the cited id exists in the store before printing.",
+      "observable": "Prints a draft answering m008 (Devika asking to resend the staging queue URL) that contains the exact AMQP URL from m003, plus a 'cited: [\"m003\"]' line. m003 really contains that URL -- demo.py asserts the cited id exists in the store before printing.",
       "evidence": "trace.jsonl, events tagged cap=R2 (a 'draft' event whose cited id is m003)"
     },
     {

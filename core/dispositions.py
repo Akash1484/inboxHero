@@ -180,11 +180,12 @@ def classify_one(message, store, prefs, all_commitments, owner_email, owner_doma
     }
 
 
-def classify_all(all_messages, store, prefs, all_commitments, owner_email, owner_domain, known_domains):
+def classify_all(all_messages, store, prefs, all_commitments, owner_email, owner_domain, known_domains, cap="R1"):
     decisions = []
     for message in all_messages:
         d = classify_one(message, store, prefs, all_commitments, owner_email, owner_domain, known_domains)
         decisions.append(d)
-        log_event("R1", "decision", message_id=d["id"], disposition=d["disposition"],
+        if cap:
+            log_event(cap, "decision", message_id=d["id"], disposition=d["disposition"],
                   category=d["category"], reason=d["reason"])
     return decisions

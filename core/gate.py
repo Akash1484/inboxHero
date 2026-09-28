@@ -21,6 +21,8 @@ import os
 import config
 from core.tracing import log_event
 
+_writes_this_run = 0
+
 
 def require_approval(prompt, dry_run, auto_approve=None):
     """The gate itself. Returns True/False. In --dry-run mode nothing is
@@ -45,6 +47,7 @@ def send(message_id, to, cc, subject, body, cited_ids, dry_run=False, auto_appro
                   "dry_run" if dry_run else "denied"))
     if not approved:
         return False
+    global _writes_this_run
     os.makedirs(config.OUTBOX_DIR, exist_ok=True)
     out_path = os.path.join(config.OUTBOX_DIR, f"{message_id}.json")
     with open(out_path, "w", encoding="utf-8") as f:
@@ -52,6 +55,7 @@ def send(message_id, to, cc, subject, body, cited_ids, dry_run=False, auto_appro
             "in_reply_to": message_id, "to": to, "cc": cc, "subject": subject,
             "body": body, "cited_ids": cited_ids,
         }, f, indent=2)
+    _writes_this_run += 1
     log_event(cap, "sent", message_id=message_id, path=out_path)
     return True
 
@@ -69,6 +73,6 @@ def delete(message_id, reason, dry_run=False, auto_approve=None, cap="R3"):
 
 
 def count_outbox_writes():
-    if not os.path.isdir(config.OUTBOX_DIR):
-        return 0
-    return len([f for f in os.listdir(config.OUTBOX_DIR) if f.endswith(".json")])
+    """Files written by send() during THIS process (not files already
+    sitting in outbox/ from an earlier run)."""
+    return _writes_this_run

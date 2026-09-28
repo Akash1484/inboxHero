@@ -53,13 +53,13 @@ def build_context():
     }
 
 
-def get_decisions(ctx):
+def get_decisions(ctx, cap="R1"):
     """Cached on ctx so --all doesn't reclassify the whole mailbox once per
     capability."""
     if "decisions" not in ctx:
         ctx["decisions"] = dispositions.classify_all(
             ctx["all_messages"], ctx["store"], ctx["prefs"], ctx["all_commitments"],
-            config.OWNER_EMAIL, ctx["owner_domain"], ctx["known_domains"],
+            config.OWNER_EMAIL, ctx["owner_domain"], ctx["known_domains"], cap=cap,
         )
     return ctx["decisions"]
 
@@ -115,7 +115,7 @@ def run_r2(ctx, msg_id):
 # ---------------------------------------------------------------------------
 
 def run_r3(ctx, dry_run):
-    decisions = get_decisions(ctx)
+    decisions = get_decisions(ctx, None)
     store = ctx["store"]
     proposed = 0
     for d in decisions:
@@ -202,7 +202,7 @@ def run_r5(ctx):
 # ---------------------------------------------------------------------------
 
 def run_r6(ctx):
-    decisions = get_decisions(ctx)
+    decisions = get_decisions(ctx, None)
     dboard = dashboard_mod.build(decisions, ctx["by_id"], ctx["all_commitments"])
     dashboard_mod.write_html(dboard, config.DASHBOARD_HTML_PATH)
     dashboard_mod.write_json(dboard, config.DASHBOARD_JSON_PATH)
@@ -232,7 +232,7 @@ def run_x1(ctx):
 # ---------------------------------------------------------------------------
 
 def run_x2(ctx):
-    decisions = get_decisions(ctx)
+    decisions = get_decisions(ctx, None)
     d = digest_mod.build_digest(decisions, ctx["by_id"])
     print("== Needs you ==")
     for line in d["needs_you"]:
